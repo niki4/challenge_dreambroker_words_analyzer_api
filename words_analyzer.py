@@ -1,17 +1,28 @@
 import collections
+import string
 from flask import Flask, request
+from typing import List
 
 app = Flask(__name__)
 
 
-def count_spaces(s: str) -> int:
-    return s.count(" ")
+def sum_chars_count(words_counter) -> int:
+    return sum(words_counter.values())
 
-def count_words(s: str) -> int:
-    return len(s.split())
+def split_to_words(s: str) -> List[str]:
+    return s.split()
 
-def count_chars(s: str):
-    return collections.Counter(s)
+def count_ascii_letters(word_list: List[str]):
+    counter = collections.Counter()
+    result = list()
+    for word in word_list:
+        counter.update(word.lower())
+    chars_length = sum_chars_count(counter)  # len of non-space chars, incl. nums
+
+    for ch in string.ascii_lowercase:  # filter non-letters, e.g. nums
+        if counter[ch]:
+            result.append({ch: counter[ch]})
+    return result, chars_length
 
 @app.route("/analyze", methods=["GET", "POST"])
 def analyze():
@@ -19,13 +30,16 @@ def analyze():
         json_data = request.get_json()  # raise and return "bad request" if non-valid json
         if "text" not in json_data:
             abort(400)
+        text = json_data["text"]
+        words = split_to_words(text)
+        ch_count, ch_len_without_spaces = count_ascii_letters(words)
         return {
             "textLength": {
-                "withSpaces": len(json_data["text"]),
-                "withoutSpaces": len(json_data["text"]) - count_spaces(json_data["text"]),
+                "withSpaces": len(text),
+                "withoutSpaces": ch_len_without_spaces,
             },
-            "wordCount": count_words(json_data["text"]),
-            "characterCount": count_chars(json_data["text"]),
+            "wordCount": len(words),
+            "characterCount": ch_count,
         }
     else:
         return """
