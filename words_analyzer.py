@@ -48,7 +48,7 @@ def analyze():
     else:
         return """
         <p>Send POST request with JSON string to parse, e.g.</p>
-        <code>curl --header "Content-Type: application/json" \
-              --request POST --data '{"text":"hello 2 times  "}' \
-              https://mysuperawesomeapi.com/analyze</code>
+        <pre>curl --header "Content-Type: application/json" \
+--request POST --data '{"text":"hello 2 times  "}' \
+https://mysuperawesomeapi.com/analyze</pre>
         """
