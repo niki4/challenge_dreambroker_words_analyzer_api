@@ -6,7 +6,7 @@ Curl command to call the API might look like this:
             curl --header "Content-Type: application/json" \
             --request POST \
             --data '{"text":"hello 2 times  "}' \
-            https://mysuperawesomeapi.com/analyze
+            https://py-words-analyzer.herokuapp.com/analyze
             
 And the response will be:
 
@@ -17,3 +17,7 @@ And the response will be:
         }
             
 Please pay attention that the characters array contain only English letters and they are alphabetically ordered.
+
+## Demo App
+1. Open in browser: https://py-words-analyzer.herokuapp.com/analyze
+2. Follow the instructions (sending POST request to get the result, as stated on the page).

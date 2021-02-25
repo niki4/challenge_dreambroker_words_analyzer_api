@@ -50,5 +50,5 @@ def analyze():
         <p>Send POST request with JSON string to parse, e.g.</p>
         <pre>curl --header "Content-Type: application/json" \
 --request POST --data '{"text":"hello 2 times  "}' \
-https://mysuperawesomeapi.com/analyze</pre>
+https://py-words-analyzer.herokuapp.com/analyze</pre>
         """
