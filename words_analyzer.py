@@ -1,7 +1,8 @@
 import collections
 import string
-from flask import Flask, request
 from typing import List
+
+from flask import Flask, request, abort
 
 app = Flask(__name__)
 
@@ -9,8 +10,10 @@ app = Flask(__name__)
 def sum_chars_count(words_counter) -> int:
     return sum(words_counter.values())
 
+
 def split_to_words(s: str) -> List[str]:
     return s.split()
+
 
 def count_ascii_letters(word_list: List[str]):
     counter = collections.Counter()
@@ -23,6 +26,7 @@ def count_ascii_letters(word_list: List[str]):
         if counter[ch]:
             result.append({ch: counter[ch]})
     return result, chars_length
+
 
 @app.route("/analyze", methods=["GET", "POST"])
 def analyze():
