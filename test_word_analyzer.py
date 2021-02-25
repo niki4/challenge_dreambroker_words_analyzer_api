@@ -20,3 +20,7 @@ class TestWordAnalyzer(unittest.TestCase):
                 assert json_resp[field] == expected[field], f"Data mismatch for '{field}':\n" \
                                                             f"expected:\t{expected[field]}\n" \
                                                             f"got:\t\t{json_resp[field]}"
+
+
+if __name__ == '__main__':
+    unittest.main()
